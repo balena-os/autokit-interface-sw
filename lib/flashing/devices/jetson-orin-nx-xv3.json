@@ -1,0 +1,5 @@
+{
+    "type": "jetson",
+    "nvme": true,
+    "machine": "jetson-orin-nx-antmicro-job"
+}
