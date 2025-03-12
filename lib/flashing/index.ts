@@ -507,13 +507,21 @@ async function flashIotGate(filename: string, autoKit: Autokit, port: usbPort){
     // Power DUT on
     await autoKit.power.on();
 
+    const [stdout, stderr] = await exec('uname -m');
+    let arch = stdout.trim();
+    if (!arch.includes('aarch64') && !arch.includes('x86_64')) {
+        // armv7 can be reported as armv7l or armv7hl
+        arch = 'armv7';
+    }
+
+    console.log(`Selecting arch: ${arch}`);
     // run flash container
     try{
         await new Promise<void>(async (resolve, reject) => {
             let flash = spawn('./run_container.sh',
                 [
                 '-a',
-                'armv7',
+                arch,
                 '-i',
                 filename
                 ], 
