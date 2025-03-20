@@ -1,4 +1,33 @@
 - commits:
+    - subject: Add jetson-orin-nx-xv3 device type
+      hash: 9da0222743190b6bc4a96dd10c8a3bde8bd26476
+      body: >
+        This board needed a device specific power mechanism override, and a way
+        to use a different machine name than its DT slug for the jetson flash
+        scripts
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: Ryan Cooke
+      nested: []
+    - subject: "flashing: iot-gate:  use machine's architecture"
+      hash: e32f7c9013b945536a6a4c93ea2c09de7a7ee138
+      body: |
+        Even though armv7 can build and run on aarch64, it does not work for
+        locked devices, but the aarch64 build does.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+  version: 1.2.1
+  title: ""
+  date: 2025-03-20T09:25:18.273Z
+- commits:
     - subject: "power: jetsonTx2: use eth carrier instead of GPIO for power state"
       hash: 2c25b18c249639ae1aeae2f5d0637fefa91480db
       body: ""
