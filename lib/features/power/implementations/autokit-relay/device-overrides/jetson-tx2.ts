@@ -1,5 +1,5 @@
 import { delay } from 'bluebird';
-import { AutokitRelay } from "./";
+import { AutokitRelay } from "..";
 import { exec } from 'mz/child_process';
 
 // Device specific override for Tx2 power on / off sequencing

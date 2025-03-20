@@ -584,7 +584,8 @@ async function flash(filename: string, deviceType: string, autoKit: Autokit, por
             break;
         }
         case 'jetson': {
-            await flashJetson(filename, autoKit, deviceType, flashProcedure.nvme);
+            let flashMachine = flashProcedure.machine || deviceType
+            await flashJetson(filename, autoKit, flashMachine, flashProcedure.nvme);
             break;
         }
         case 'iot-gate': {

@@ -7,9 +7,13 @@ export class AutokitRelay implements Power {
     public powerRelay: any
     public conn: boolean
     public relayNum: number
-    constructor(){
-        this.relayId = process.env.POWER_RELAY_SERIAL || 'HURTM'
-        this.relayNum = Number(process.env.POWER_RELAY_NUM || '0')
+    constructor(
+        relayId = (process.env.POWER_RELAY_SERIAL || 'HURTM'),
+        relayNum = Number(process.env.POWER_RELAY_NUM || '0'),
+        conn = (process.env.USB_RELAY_CONN === 'NC') ? false: true, // if the user specifies they have set up the connection to be NC
+    ){
+        this.relayId = relayId
+        this.relayNum = relayNum
         let relays = USBRelay.Relays 
         // iterate through the array, and find the relay that is associated with power
         // if there is only one relay, then it doesn't matter
@@ -22,7 +26,7 @@ export class AutokitRelay implements Power {
                 }
             }
         }
-        this.conn = (process.env.USB_RELAY_CONN === 'NC') ? false: true // if the user specifies they have set up the connection to be NC
+        this.conn = conn 
     }
 
     async setup(): Promise<void> {

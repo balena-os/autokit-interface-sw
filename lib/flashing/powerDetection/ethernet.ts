@@ -32,7 +32,7 @@ export async function waitForPowerOffEthernet(autoKit:Autokit):Promise<void>{
     }
 
     const POLL_INTERVAL = 1000; // 1 second
-    const POLL_TRIES = 20; // 20 tries
+    const POLL_TRIES = Number(process.env.POWER_OFF_POLL_TRIES) || 20 // 20 tries by default
     let attempt = 0;
     await delay(1000 * 60);
     while (dutOn) {
