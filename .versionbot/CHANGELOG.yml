@@ -1,4 +1,20 @@
 - commits:
+    - subject: Add emmc flasher type and generic container run
+      hash: 2144a7d0b063cd34fa718521e9fd6f71554e8c86
+      body: >
+        This is to enable devices types where an "external" container is run to
+        prepare the device before flashing
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: Ryan Cooke
+      nested: []
+  version: 1.2.2
+  title: ""
+  date: 2025-04-10T12:58:13.572Z
+- commits:
     - subject: Add jetson-orin-nx-xv3 device type
       hash: 9da0222743190b6bc4a96dd10c8a3bde8bd26476
       body: >
