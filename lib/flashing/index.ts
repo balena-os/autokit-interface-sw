@@ -594,7 +594,143 @@ async function flash(filename: string, deviceType: string, autoKit: Autokit, por
             }
             await flashIotGate(filename, autoKit, port)
         }
+        case 'emmc': {
+            await flashEmmc(filename, autoKit, flashProcedure.jumper, flashProcedure.container);
+            break;
+        }
     }
+}
+
+async function flashEmmc(filename: string, autoKit: Autokit, jumper?: boolean, container?: boolean){
+    const powerOnDelay = Number(process.env.CAP_DELAY) || 1000*60*5;
+    
+    console.log(`Entering flashing method for emmc devices...`);
+
+    if(jumper){
+        await autoKit.digitalRelay.on();
+        //small delay to ensure jumper has toggled
+        await delay(1000 * 5);
+    }
+    
+    // Power on DUT
+    await autoKit.power.on();
+    
+    if(container){
+        console.log(`Starting container...`)
+        await runContainer();
+    }
+
+    //small delay to ensure DUT has powered on
+    await delay(1000 * 5);
+
+    const EMMC_DEVICE = process.env.EMMC_DEVICE || '/dev/sda';
+    // For linux, udev will provide us with a nice id.
+    const drive = await getDrive(await getDevInterface(EMMC_DEVICE));
+    console.log(`Start flashing the image`);
+    await flashToDisk(drive, filename);
+    console.log('Flashing completed');
+
+    await autoKit.power.off();
+    
+    // toggle relay "OFF" to connect to disconnect USB
+    if(jumper){
+        await autoKit.digitalRelay.off();
+        await delay(5 * 1000);
+    }
+
+    await delay(powerOnDelay);
+}
+
+async function runContainer(){
+    // checkout container github repo
+    const CONTAINER_BRANCH = process.env.CONTAINER_BRANCH || 'master';
+    const CONTAINER_REPO = process.env.CONTAINER_REPO || null;
+    console.log(`CONTAINER REPO: ${CONTAINER_REPO}`);
+    if (CONTAINER_REPO === null){
+        console.log(`NO REPO`)
+       throw new Error('No github repo for container specified!');
+    }
+
+    // Assumes a .git URL
+    // Extract the repo name 
+    const repoName = CONTAINER_REPO.match(/([^\/]+)\.git$/);
+    console.log(repoName);
+    if (!repoName) {
+        throw new Error(`Please use a .git repo URL!`)
+    }
+    const cloneDir = `/usr/app/`;
+    const buildDir = `${cloneDir}${repoName[1]}`
+
+    console.log(`Cloning: ${CONTAINER_REPO}, branch: ${CONTAINER_BRANCH}`);
+
+    try{ 
+        await exec(`cd /usr/app/ && git clone ${CONTAINER_REPO}`);
+    } catch(e){
+        console.log(e)
+    }
+    let checkout = await exec(`cd ${buildDir} && git fetch && git reset --hard origin/${CONTAINER_BRANCH}`);
+    console.log(checkout)
+
+    const imageTag = `my_image`
+    // Build container
+    const BUILD_CMD = process.env.BUILD_CMD || null;
+    await new Promise<void>(async (resolve, reject) => {
+       let build = spawn('docker',
+           [
+               'build',
+               '-t',
+               `${imageTag}`,
+               `${buildDir}`
+           ], 
+           { 
+               'stdio': 'inherit'
+           }
+        );
+
+        build.on('exit', (code) => {
+            if (code === 0) {
+                resolve();
+            } else {
+                reject(new Error(`Docker build exit code was: ${code}. Powered off DUT.`));
+            }
+        });
+        build.on('error', (err) => {
+            reject(new Error(`Error with docker build: ${err.message}. Powered off DUT.`));
+        });
+    })
+    
+    await new Promise<void>(async (resolve, reject) => {
+        const CONTAINER_OPTIONS = process.env.CONTAINER_OPTIONS || '--privileged';
+        const CONTAINER_ENTRY = process.env.CONTAINER_ENTRY || '';
+        // Run Container
+        let run = spawn('docker',
+            [
+                'container',
+                'run',
+                '--rm',
+                '-it',
+                `${CONTAINER_OPTIONS}`,
+                `${imageTag}`,
+                `${CONTAINER_ENTRY}`
+            ], 
+            { 
+                'stdio': 'inherit',
+                'shell': true,
+            }
+        )
+
+        run.on('exit', (code) => {
+            if (code === 0) {
+                resolve();
+            } else {
+                reject(new Error(`Docker run exit code was: ${code}`))
+            }
+        });
+        run.on('error', (err) => {
+            reject(new Error(`Error with docker run: ${err.message}`));
+        });
+    });
+
 }
 
 export { flash }

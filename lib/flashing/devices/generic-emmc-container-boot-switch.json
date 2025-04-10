@@ -1,0 +1,5 @@
+{
+    "type": "emmc",
+    "container": true,
+    "jumper": true
+}
