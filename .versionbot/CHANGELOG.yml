@@ -1,4 +1,18 @@
 - commits:
+    - subject: "flashing/devices: Add Jetson Nano eMMC and derivate device-types"
+      hash: fbd108655c5700a1598e816987259e821ccdc4cf
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alexandru Costache <alexandru@balena.io>
+        signed-off-by: Alexandru Costache <alexandru@balena.io>
+      author: Alexandru Costache
+      nested: []
+  version: 1.2.3
+  title: ""
+  date: 2025-06-09T09:29:26.978Z
+- commits:
     - subject: Add emmc flasher type and generic container run
       hash: 2144a7d0b063cd34fa718521e9fd6f71554e8c86
       body: >
