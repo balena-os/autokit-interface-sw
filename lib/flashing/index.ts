@@ -365,7 +365,11 @@ async function flashJetson(filename: string, autoKit: Autokit, deviceType: strin
                         `${JETSON_FLASH_DIR}`
                     ], 
                     { 
-                        'stdio': 'inherit'
+                        'stdio': [
+                            'ignore',          // stdin - no input, so ignore
+                            process.stdout,  // stdout: Direct Docker's stdout to Node.js's console stdout
+                            process.stderr   // stderr: Direct Docker's stderr to Node.js's console stderr
+                        ],
                     }
                 )
 
@@ -390,7 +394,11 @@ async function flashJetson(filename: string, autoKit: Autokit, deviceType: strin
                     `${deviceType}`
                     ], 
                     { 
-                        'stdio': 'inherit',
+                        'stdio': [
+                            'ignore',          // stdin - no input, so ignore
+                            process.stdout,  // stdout: Direct Docker's stdout to Node.js's console stdout
+                            process.stderr   // stderr: Direct Docker's stderr to Node.js's console stderr
+                        ],
                         'shell': true,
                         'cwd': JETSON_FLASH_DIR
                     }
@@ -440,7 +448,11 @@ async function flashJetson(filename: string, autoKit: Autokit, deviceType: strin
                     `./${JETSON_FLASH_SCRIPT} -f ${filename} -m ${deviceType} --accept-license yes`
                 ], 
                 { 
-                    'stdio': 'inherit',
+                    'stdio': [
+                        'ignore',          // stdin - no input, so ignore
+                        process.stdout,  // stdout: Direct Docker's stdout to Node.js's console stdout
+                        process.stderr   // stderr: Direct Docker's stderr to Node.js's console stderr
+                    ],
                     'shell': true,
                 }
             )
