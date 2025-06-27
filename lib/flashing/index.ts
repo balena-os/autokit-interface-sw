@@ -366,12 +366,16 @@ async function flashJetson(filename: string, autoKit: Autokit, deviceType: strin
                     ], 
                     { 
                         'stdio': [
-                            'ignore',          // stdin - no input, so ignore
-                            process.stdout,  // stdout: Direct Docker's stdout to Node.js's console stdout
-                            process.stderr   // stderr: Direct Docker's stderr to Node.js's console stderr
+                            'pipe',          // stdin - no input, so ignore
+                            'pipe',  // stdout
+                            'pipe'  // stderr
                         ],
                     }
                 )
+
+                build.stderr.on('data', (data) => {
+                    console.log(data.toString());
+                })
 
                 build.on('exit', (code) => {
                     if (code === 0) {
@@ -395,14 +399,18 @@ async function flashJetson(filename: string, autoKit: Autokit, deviceType: strin
                     ], 
                     { 
                         'stdio': [
-                            'ignore',          // stdin - no input, so ignore
-                            process.stdout,  // stdout: Direct Docker's stdout to Node.js's console stdout
-                            process.stderr   // stderr: Direct Docker's stderr to Node.js's console stderr
+                            'pipe',          // stdin - no input, so ignore
+                            'pipe',  // stdout
+                            'pipe'  // stderr
                         ],
                         'shell': true,
                         'cwd': JETSON_FLASH_DIR
                     }
                 )
+
+                buildAndRun.stderr.on('data', (data) => {
+                    console.log(data.toString());
+                })
 
                 buildAndRun.on('exit', (code) => {
                     if (code === 0) {
@@ -449,13 +457,17 @@ async function flashJetson(filename: string, autoKit: Autokit, deviceType: strin
                 ], 
                 { 
                     'stdio': [
-                        'ignore',          // stdin - no input, so ignore
-                        process.stdout,  // stdout: Direct Docker's stdout to Node.js's console stdout
-                        process.stderr   // stderr: Direct Docker's stderr to Node.js's console stderr
+                        'pipe',          // stdin - no input, so ignore
+                        'pipe',  // stdout
+                        'pipe'  // stderr
                     ],
                     'shell': true,
                 }
             )
+
+            flash.stderr.on('data', (data) => {
+                console.log(data.toString());
+            })
 
             flash.on('exit', (code) => {
                 if (code === 0) {
