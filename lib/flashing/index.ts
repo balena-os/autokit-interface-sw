@@ -593,6 +593,7 @@ async function flash(filename: string, deviceType: string, autoKit: Autokit, por
                 throw new Error('No usb port specified!')
             }
             await flashIotGate(filename, autoKit, port)
+            break;
         }
         case 'emmc': {
             await flashEmmc(filename, autoKit, flashProcedure.jumper, flashProcedure.container);
