@@ -1,4 +1,18 @@
 - commits:
+    - subject: exit cleanly after flashing iot-gate devices
+      hash: 17175dc385169c6045fd80ef3672d42cf58be3fa
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: Ryan Cooke
+      nested: []
+  version: 1.2.4
+  title: ""
+  date: 2025-07-14T14:39:25.656Z
+- commits:
     - subject: "flashing/devices: Add Jetson Nano eMMC and derivate device-types"
       hash: fbd108655c5700a1598e816987259e821ccdc4cf
       body: ""
