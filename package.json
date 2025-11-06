@@ -17,7 +17,7 @@
     "docs": "rimraf ./docs/ && npx typedoc --tsconfig tsconfig.json && touch docs/.nojekyll"
   },
   "engines": {
-    "node": ">=18.0.0 < 19"
+    "node": ">=20.0.0 < 21"
   },
   "author": "",
   "license": "Apache-2.0",
