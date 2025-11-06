@@ -1,4 +1,18 @@
 - commits:
+    - subject: update to node 20
+      hash: 889f47aab602a0e9c4e93bd895069917cd491eb1
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: Ryan Cooke
+      nested: []
+  version: 1.2.5
+  title: ""
+  date: 2025-11-06T10:35:27.980Z
+- commits:
     - subject: exit cleanly after flashing iot-gate devices
       hash: 17175dc385169c6045fd80ef3672d42cf58be3fa
       body: ""
