@@ -1,4 +1,20 @@
 - commits:
+    - subject: "lib/flashing/devices: Add Generic BIOS keyboard"
+      hash: 123f4ce0393bf59b16e9f225d26ca7fec3ed388b
+      body: |
+        which only needs one key down and an enter for selecting
+        USB boot.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alexandru Costache <alexandru@balena.io>
+        signed-off-by: Alexandru Costache <alexandru@balena.io>
+      author: Alexandru Costache
+      nested: []
+  version: 1.2.6
+  title: ""
+  date: 2025-11-06T10:42:35.545Z
+- commits:
     - subject: update to node 20
       hash: 889f47aab602a0e9c4e93bd895069917cd491eb1
       body: ""
