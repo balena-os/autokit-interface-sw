@@ -1,7 +1,7 @@
 const SerialPort  = require('serialport');
 
 export class Ftdi implements Serial {
-    public DEV_SERIAL = '/dev/ttyUSB0' || process.env.DEV_SERIAL;
+    public DEV_SERIAL = process.env.DEV_SERIAL || '/dev/ttyUSB0';
     public BAUD_RATE = Number(process.env.BAUD_RATE || 115200);
     public serial : any;
     constructor(){
