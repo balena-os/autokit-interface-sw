@@ -1,4 +1,18 @@
 - commits:
+    - subject: "Add id-token: write permission for NPM OIDC publishing"
+      hash: 1cff13c723feddbb6f831852909d7a1b925bce42
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 1.2.7
+  title: ""
+  date: 2026-02-19T14:38:57.900Z
+- commits:
     - subject: "lib/flashing/devices: Add Generic BIOS keyboard"
       hash: 123f4ce0393bf59b16e9f225d26ca7fec3ed388b
       body: |
