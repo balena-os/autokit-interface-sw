@@ -1,4 +1,30 @@
 - commits:
+    - subject: fix serial path variable
+      hash: 303341e5226c4025b34594e9886889cf6213549a
+      body: >
+        This fixes a bug where the serial device for the autokit-DUT channel was
+        hard-coded to be /dev/ttyUSB0 , ignoring the confirable env var
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: Ryan Cooke
+      nested: []
+    - subject: add custom power routine for jetson-orin-nx-es
+      hash: 5fded3d77443ed5fc88015eaa06ff155fc2cc1ee
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: Ryan Cooke
+      nested: []
+  version: 1.2.8
+  title: ""
+  date: 2026-02-23T14:05:48.168Z
+- commits:
     - subject: "Add id-token: write permission for NPM OIDC publishing"
       hash: 1cff13c723feddbb6f831852909d7a1b925bce42
       body: ""
