@@ -86,6 +86,11 @@ class NetworkManager {
 			'802-11-wireless-security': {
 				'key-mgmt': new dbus.Variant('s', 'wpa-psk'),
 				psk: new dbus.Variant('s', psk),
+				...(process.env.WIFI_AP_SECURITY_OPTS && { // Extended Security Options
+					proto: new dbus.Variant('as', ['rsn']), // RSN = WPA2
+					pairwise: new dbus.Variant('as', ['ccmp']), // AES Encryption
+					group: new dbus.Variant('as', ['ccmp']) // Group Cipher AES
+            	})
 			},
 			ipv4: { method: new dbus.Variant('s', method) },
 			ipv6: { method: new dbus.Variant('s', 'ignore') },
