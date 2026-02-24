@@ -1,4 +1,21 @@
 - commits:
+    - subject: Add retry to serial port opening
+      hash: bde8ace484d5213c38e5b1fe030956ce74225c37
+      body: >
+        When using serial to detect provisioning is completed, there may be a
+        delay before the serial port enumerates, in the case of some devices.
+        This retry stops an error if this happens
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: Ryan Cooke
+      nested: []
+  version: 1.2.9
+  title: ""
+  date: 2026-02-24T13:55:54.787Z
+- commits:
     - subject: fix serial path variable
       hash: 303341e5226c4025b34594e9886889cf6213549a
       body: >
