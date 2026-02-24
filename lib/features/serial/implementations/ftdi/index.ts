@@ -18,22 +18,22 @@ export class Ftdi implements Serial {
     }
 
     async open(){
-        if(this.serial.isOpen){
-            console.log(`Serial already open!`);
-            return this.serial;
-        } else {
-            try{
-                console.log(`Opening Serial port ${this.DEV_SERIAL} with baud rate: ${this.BAUD_RATE}`)
-                this.serial.open(() => {
-                    console.log('DUT serial is opened');
-                    this.serial?.flush();
-                })
-                return this.serial;
-            } catch(e){
-                console.log(e)
+        return new Promise((resolve, reject) => {
+            if (this.serial.isOpen) {
+                console.log(`Serial already open!`)
+                return resolve(this.serial);
             }
-            
-        }
+
+            this.serial.open((err: Error | null) => {
+                console.log(`Opening Serial port ${this.DEV_SERIAL} with baud rate: ${this.BAUD_RATE}`)
+                if (err) {
+                    return reject(err);
+                }
+                console.log('DUT serial is opened');
+                this.serial?.flush();
+                resolve(this.serial)
+            });
+        });
     }
 
     async write(data: string): Promise<string | void>  {
