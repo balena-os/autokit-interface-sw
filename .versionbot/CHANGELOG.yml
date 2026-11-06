@@ -1,4 +1,18 @@
 - commits:
+    - subject: Update etcher-sdk to v10.2.20, update Node version engine requirement
+      hash: 2df6826321b7c01ae81f69ef5a9541df3c1110e6
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alexandru Costache <alexandru@balena.io>
+        signed-off-by: Alexandru Costache <alexandru@balena.io>
+      author: Alexandru Costache
+      nested: []
+  version: 1.2.10
+  title: ""
+  date: 2026-11-06T17:03:53.283Z
+- commits:
     - subject: Add retry to serial port opening
       hash: bde8ace484d5213c38e5b1fe030956ce74225c37
       body: >
