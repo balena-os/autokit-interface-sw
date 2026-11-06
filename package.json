@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/balena-io-hardware/autokit-sw"
+    "url": "https://github.com/balena-os/autokit-interface-sw"
   },
   "scripts": {
     "build": "npx tsc",
@@ -17,7 +17,7 @@
     "docs": "rimraf ./docs/ && npx typedoc --tsconfig tsconfig.json && touch docs/.nojekyll"
   },
   "engines": {
-    "node": ">=20.0.0 < 21"
+    "node": ">=20.0.0 <= 24.22.2"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -28,7 +28,7 @@
     "bluebird-retry": "^0.11.0",
     "dbus-next": "^0.9.0",
     "debug": "^4.3.4",
-    "etcher-sdk": "^9.1.0",
+    "etcher-sdk": "^10.2.20",
     "fs-extra": "^10.1.0",
     "mz": "^2.7.0",
     "node-hid": "^2.1.2",
